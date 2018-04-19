@@ -1,0 +1,44 @@
+import random
+opr = ['＋','－','×','÷']  #四则运算符
+jg='0'
+print('输入"q"可以退出')
+num=1
+while True:
+    fh=random.randint(0,3)
+    x=random.randint(1,100)
+    y=random.randint(1,10)
+    rjg=0
+    if fh==0:    #加法答案
+        rjg=x+y
+    elif fh==1:  #减法答案,只要求运算正数
+        x,y=max(x,y),min(x,y)
+        rjg=x-y
+    elif fh==2:  #乘法答案
+        rjg=x*y
+    elif fh==3:  #除法答案,只要求整除运算
+        x,y=max(x,y),min(x,y)
+        while x%y!=0:
+            x=random.randint(1,100)
+            y=random.randint(1,10)
+            x,y=max(x,y),min(x,y)
+        rjg=int(x/y)
+
+    print ('第',num,'题:',x,opr[fh],y,'=',end='')  #输出题目
+    num+=1
+    jg=input()
+    if jg=='q':
+        break
+    sr=int(jg)
+    while int(sr)!=rjg:                                          #确认答案是否错误
+        print('答错了,输入"a"获得正确答案')                          #回答错误,可输入'a'得到answer
+        print('再算一遍,第',num,'题:',x,opr[fh],y,'=',end='')      #给予一次机会回答
+        jg=input()
+        if jg=='a':
+            print('正确答案为:',rjg)
+            break;
+        sr=int(jg)
+        if int(sr)==rjg:
+            break;
+            continue;
+    if int(sr)==rjg:
+        print('正确')
